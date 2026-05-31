@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thomas Le Goff — Portfolio BUT Informatique</title>
+  <meta name="description" content="Portfolio de Thomas Le Goff, étudiant en BUT Informatique à l'IUT de Lannion. Développeur passionné, cherche alternance.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- CANVAS BG -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ADMIN TOGGLE -->
+<button class="admin-toggle" onclick="toggleAdmin()" title="Administration">⚙</button>
+
+<!-- ADMIN MODE BADGE -->
+<div class="admin-mode-badge">◉ MODE ADMINISTRATION</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-logo">TLG.DEV</div>
+  <ul class="nav-links">
+    <li><a href="#" data-page="home" onclick="navigateTo('home'); return false;">Accueil</a></li>
+    <li><a href="#" data-page="about" onclick="navigateTo('about'); return false;">À propos</a></li>
+    <li><a href="#" data-page="projects" onclick="navigateTo('projects'); return false;">Projets</a></li>
+    <li><a href="#" data-page="skills" onclick="navigateTo('skills'); return false;">Compétences</a></li>
+    <li><a href="#" data-page="contact" onclick="navigateTo('contact'); return false;">Contact</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════
+     PAGE — ACCUEIL
+═══════════════════════════════════════════════════ -->
+<div class="page" id="home">
+  <section class="hero">
+    <div class="hero-eyebrow">Étudiant BUT Informatique · IUT Lannion</div>
+    <h1 class="hero-name">
+      <span class="first">Thomas </span><br>
+      <span class="last">Le Goff</span>
+    </h1>
+    <p class="hero-title">Développeur · Bases de données · IA & Data</p>
+    <p class="hero-desc">
+      Passionné par le développement logiciel et les nouvelles technologies, je construis des projets 
+      concrets et cherche une <strong style="color:var(--accent-cyan)">alternance en développement d'applications 
+      ou gestion de bases de données</strong>, avec un intérêt fort pour la data et l'intelligence artificielle.
+    </p>
+    <div class="hero-cta">
+      <button class="btn btn-primary" onclick="navigateTo('projects')">Voir mes projets →</button>
+      <button class="btn btn-outline" onclick="navigateTo('contact')">Me contacter</button>
+      <a href="thomas_le_goff_cv.pdf" class="btn btn-outline" download>⤓ CV PDF</a>
+      <a href="https://www.linkedin.com/in/thomas-le-goff-4585313ba/" target="_blank" class="btn btn-outline">💼 LinkedIn</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">6</div>
+        <div class="stat-label">Compétences BUT</div>
+      </div>
+      <div>
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Projets réalisés</div>
+      </div>
+      <div>
+        <div class="stat-num">B2</div>
+        <div class="stat-label">Anglais</div>
+      </div>
+      <div>
+        <div class="stat-num">2026</div>
+        <div class="stat-label">Promo IUT</div>
+      </div>
+    </div>
+    <div class="hero-bg-text">INIT</div>
+    <div class="hero-scroll">scroll</div>
+  </section>
+
+  <!-- Quick Nav Cards -->
+  <section style="padding-top:0">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem">
+      <div class="card" onclick="navigateTo('about')" style="cursor:none">
+        <div style="font-size:2rem;margin-bottom:1rem">👤</div>
+        <h3 style="font-family:var(--font-display);font-size:0.9rem;margin-bottom:0.5rem;color:var(--accent-cyan)">À PROPOS</h3>
+        <p style="font-size:0.83rem;color:var(--text-secondary);line-height:1.6">Mon parcours, ma formation et mes objectifs professionnels.</p>
+      </div>
+      <div class="card" onclick="navigateTo('projects')" style="cursor:none">
+        <div style="font-size:2rem;margin-bottom:1rem">⚡</div>
+        <h3 style="font-family:var(--font-display);font-size:0.9rem;margin-bottom:0.5rem;color:var(--accent-cyan)">PROJETS</h3>
+        <p style="font-size:0.83rem;color:var(--text-secondary);line-height:1.6">Mes SAÉ, projets académiques et réalisations personnelles.</p>
+      </div>
+      <div class="card" onclick="navigateTo('skills')" style="cursor:none">
+        <div style="font-size:2rem;margin-bottom:1rem">🧠</div>
+        <h3 style="font-family:var(--font-display);font-size:0.9rem;margin-bottom:0.5rem;color:var(--accent-cyan)">COMPÉTENCES</h3>
+        <p style="font-size:0.83rem;color:var(--text-secondary);line-height:1.6">Les 6 compétences BUT Informatique et mes technologies maîtrisées.</p>
+      </div>
+      <div class="card" onclick="navigateTo('contact')" style="cursor:none">
+        <div style="font-size:2rem;margin-bottom:1rem">✉️</div>
+        <h3 style="font-family:var(--font-display);font-size:0.9rem;margin-bottom:0.5rem;color:var(--accent-cyan)">CONTACT</h3>
+        <p style="font-size:0.83rem;color:var(--text-secondary);line-height:1.6">Parlons de vos projets et d'une opportunité d'alternance.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>Thomas Le Goff</span> · BUT Informatique · IUT de Lannion · 2025–2026
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     PAGE — À PROPOS
+═══════════════════════════════════════════════════ -->
+<div class="page" id="about">
+  <section>
+    <div class="section-label">Qui suis-je ?</div>
+    <h2 class="section-title">À propos de moi</h2>
+
+    <div class="about-grid">
+      <!-- Visual -->
+      <div class="about-visual">
+        <div class="about-avatar-wrap">
+          <div class="about-avatar">
+            <!-- Photo from CV -->
+            <div style="font-size:5rem;color:var(--text-muted)">👨‍💻</div>
+          </div>
+          <div class="about-info-badge">
+            <div class="num">BUT</div>
+            <div class="lbl">Informatique</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="about-content">
+        <p>
+          Bonjour ! Je suis <strong style="color:var(--text-primary)">Thomas Le Goff</strong>, étudiant en première année de BUT Informatique à l'<strong style="color:var(--accent-cyan)">IUT de Lannion</strong>. Passionné par le développement logiciel, les bases de données et l'intelligence artificielle, je construis des projets concrets depuis le début de ma formation.
+        </p>
+        <p>
+          J'ai obtenu mon Baccalauréat technologique STI2D, option <strong>Systèmes d'Information et Numérique (SIN)</strong>, avec la mention Bien (15/20) au Lycée Felix Le Dantec de Lannion, ce qui m'a donné de solides bases en informatique avant d'intégrer le BUT.
+        </p>
+        <p>
+          Je recherche activement une <strong style="color:var(--accent-cyan)">alternance en développement d'applications ou gestion de bases de données</strong>, avec un intérêt particulier pour la data et l'IA. Je suis motivé, rigoureux et toujours avide d'apprendre de nouvelles technologies.
+        </p>
+
+        <div class="about-details">
+          <div class="detail-item">
+            <span class="detail-label">Formation</span>
+            <span class="detail-value">BUT Informatique</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Établissement</span>
+            <span class="detail-value">IUT de Lannion</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Localisation</span>
+            <span class="detail-value">Lannion, Bretagne</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Objectif</span>
+            <span class="detail-value">Alternance Dev / Data</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Email</span>
+            <span class="detail-value">tlegoff31@gmail.com</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Disponibilité</span>
+            <span class="detail-value">Dès 2026–2027</span>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem">
+          <button class="btn btn-primary" onclick="navigateTo('contact')">Me contacter →</button>
+          <a href="thomas_le_goff_cv.pdf" class="btn btn-outline" download>⤓ Télécharger CV</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parcours -->
+    <div style="margin-top:4rem">
+      <div class="section-label">Parcours</div>
+      <h3 style="font-family:var(--font-display);font-size:1.4rem;margin-bottom:2rem">Formation & Expérience</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem">
+        <div>
+          <h4 style="font-family:var(--font-mono);font-size:0.72rem;color:var(--accent-cyan);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.5rem">// Formation</h4>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">2025 – 2026</div>
+              <div class="timeline-title">BUT Informatique — 1ère année</div>
+              <div class="timeline-sub">IUT de Lannion · Université Rennes 1</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2022 – 2025</div>
+              <div class="timeline-title">Baccalauréat STI2D — option SIN</div>
+              <div class="timeline-sub">Lycée Felix Le Dantec, Lannion · Mention Bien (15/20)</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4 style="font-family:var(--font-mono);font-size:0.72rem;color:var(--accent-cyan);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.5rem">// Expérience</h4>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">Juillet – Août 2025</div>
+              <div class="timeline-title">Employé polyvalent — Boucherie</div>
+              <div class="timeline-sub">Super U Trégastel · Mise en rayon, contact clientèle, travail en équipe</div>
+            </div>
+          </div>
+          <h4 style="font-family:var(--font-mono);font-size:0.72rem;color:var(--accent-cyan);letter-spacing:0.2em;text-transform:uppercase;margin:2rem 0 1.5rem">// Loisirs</h4>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+            <span class="tag tag-cyan">🤾 Handball</span>
+            <span class="tag tag-blue">🏐 Volleyball</span>
+            <span class="tag tag-purple">🏀 Basketball</span>
+            <span class="tag tag-green">💪 Musculation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUT Info -->
+    <div style="margin-top:4rem;padding:2.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+      <div class="section-label">Programme</div>
+      <h3 style="font-family:var(--font-display);font-size:1.1rem;margin-bottom:1rem">BUT Informatique — Les 6 Compétences</h3>
+      <p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.8;margin-bottom:1.5rem">
+        Le BUT Informatique est structuré autour de 6 compétences fondamentales que j'ai développées tout au long de ma première année à travers des cours, des ressources et des SAÉ (Situations d'Apprentissage et d'Évaluation).
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem">
+        <div class="card" style="padding:1.25rem">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <span style="font-family:var(--font-display);font-size:0.7rem;color:var(--accent-cyan)">C1</span>
+            <span style="font-size:0.88rem;font-weight:700">Réaliser un développement</span>
+          </div>
+          <p style="font-size:0.78rem;color:var(--text-secondary);line-height:1.6">Développer des applications en répondant aux besoins des clients (Sokoban C, Application Java…)</p>
+        </div>
+        <div class="card" style="padding:1.25rem">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <span style="font-family:var(--font-display);font-size:0.7rem;color:var(--accent-cyan)">C2</span>
+            <span style="font-size:0.88rem;font-weight:700">Optimiser des applications</span>
+          </div>
+          <p style="font-size:0.78rem;color:var(--text-secondary);line-height:1.6">Appréhender et construire des algorithmes, sélectionner les structures adaptées (SAÉ S1.02)</p>
+        </div>
+        <div class="card" style="padding:1.25rem">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <span style="font-family:var(--font-display);font-size:0.7rem;color:var(--accent-cyan)">C3</span>
+            <span style="font-size:0.88rem;font-weight:700">Administrer des systèmes</span>
+          </div>
+          <p style="font-size:0.78rem;color:var(--text-secondary);line-height:1.6">Déployer des services réseaux, sécuriser le SI (Linux, Docker, Bash — SAÉ 1.03)</p>
+        </div>
+        <div class="card" style="padding:1.25rem">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <span style="font-family:var(--font-display);font-size:0.7rem;color:var(--accent-cyan)">C4</span>
+            <span style="font-size:0.88rem;font-weight:700">Gérer des données</span>
+          </div>
+          <p style="font-size:0.78rem;color:var(--text-secondary);line-height:1.6">Concevoir et gérer des bases de données, assurer la persistance des données (SAÉ 1.04, Tutorial D)</p>
+        </div>
+        <div class="card" style="padding:1.25rem">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <span style="font-family:var(--font-display);font-size:0.7rem;color:var(--accent-cyan)">C5</span>
+            <span style="font-size:0.88rem;font-weight:700">Conduire un projet</span>
+          </div>
+          <p style="font-size:0.78rem;color:var(--text-secondary);line-height:1.6">Appliquer une démarche de suivi de projet, organiser les tâches (GitHub, Trello — SAÉ 1.05)</p>
+        </div>
+        <div class="card" style="padding:1.25rem">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <span style="font-family:var(--font-display);font-size:0.7rem;color:var(--accent-cyan)">C6</span>
+            <span style="font-size:0.88rem;font-weight:700">Travailler en équipe</span>
+          </div>
+          <p style="font-size:0.78rem;color:var(--text-secondary);line-height:1.6">Acquérir des compétences interpersonnelles, s'intégrer dans un projet collectif (SAÉ 1.06)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer"><span>Thomas Le Goff</span> · BUT Informatique · IUT de Lannion · 2025–2026</footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     PAGE — PROJETS
+═══════════════════════════════════════════════════ -->
+<div class="page" id="projects">
+  <section>
+    <div class="section-label">Ce que j'ai construit</div>
+    <h2 class="section-title">Mes Projets</h2>
+    <p style="color:var(--text-secondary);max-width:620px;line-height:1.8;margin-bottom:3rem;font-size:0.95rem">
+      Projets académiques (SAÉ) et personnels réalisés durant ma 1ère année de BUT Informatique. Chaque projet illustre une ou plusieurs des 6 compétences du programme.
+    </p>
+
+    <!-- Filters -->
+    <div class="projects-filter">
+      <button class="filter-btn active" data-cat="all" onclick="setFilter('all')">Tout</button>
+      <button class="filter-btn" data-cat="c" onclick="setFilter('c')">C / Algo</button>
+      <button class="filter-btn" data-cat="java" onclick="setFilter('java')">Java</button>
+      <button class="filter-btn" data-cat="web" onclick="setFilter('web')">Web</button>
+      <button class="filter-btn" data-cat="bdd" onclick="setFilter('bdd')">Bases de données</button>
+      <button class="filter-btn" data-cat="sys" onclick="setFilter('sys')">Système / DevOps</button>
+      <button class="filter-btn" data-cat="other" onclick="setFilter('other')">Autres</button>
+    </div>
+
+    <!-- Grid (rendered by JS) -->
+    <div class="projects-grid" id="projects-grid"></div>
+  </section>
+  <footer class="footer"><span>Thomas Le Goff</span> · BUT Informatique · IUT de Lannion · 2025–2026</footer>
+</div>
+
+<!-- Add project FAB -->
+<button class="add-project-btn" onclick="openAddProject()" title="Ajouter un projet">+</button>
+
+<!-- ═══════════════════════════════════════════════════
+     PAGE — COMPÉTENCES
+═══════════════════════════════════════════════════ -->
+<div class="page" id="skills">
+  <section>
+    <div class="section-label">Mon arsenal technique</div>
+    <h2 class="section-title">Compétences</h2>
+
+    <!-- 6 Compétences BUT -->
+    <div style="margin-bottom:4rem">
+      <div class="skill-category-title">6 Compétences BUT Informatique</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+            <h4 style="font-family:var(--font-display);font-size:0.85rem">C1 — Réaliser un développement</h4>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--accent-cyan)">Acquise</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="75" style="width:0%"></div></div>
+          <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.75rem;line-height:1.6">Jeu Sokoban en C, Application bancaire Java, site Web HTML/CSS</p>
+        </div>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+            <h4 style="font-family:var(--font-display);font-size:0.85rem">C2 — Optimiser des applications</h4>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--accent-cyan)">Acquise</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="65" style="width:0%"></div></div>
+          <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.75rem;line-height:1.6">Algorithmes de tri, optimisation de séquences inutiles (Sokoban V2)</p>
+        </div>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+            <h4 style="font-family:var(--font-display);font-size:0.85rem">C3 — Administrer des systèmes</h4>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--accent-cyan)">Acquise</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="70" style="width:0%"></div></div>
+          <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.75rem;line-height:1.6">Linux, Bash, Docker, chaîne de traitement automatisée (SAÉ 1.03)</p>
+        </div>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+            <h4 style="font-family:var(--font-display);font-size:0.85rem">C4 — Gérer des données</h4>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--accent-cyan)">Acquise</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="72" style="width:0%"></div></div>
+          <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.75rem;line-height:1.6">UML, Tutorial D, modèle relationnel, BDD électricité (SAÉ 1.04)</p>
+        </div>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+            <h4 style="font-family:var(--font-display);font-size:0.85rem">C5 — Conduire un projet</h4>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--accent-cyan)">Acquise</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="68" style="width:0%"></div></div>
+          <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.75rem;line-height:1.6">GitHub, Trello, livrables SAÉ 1.05 (arborescence, charte graphique, maquette)</p>
+        </div>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+            <h4 style="font-family:var(--font-display);font-size:0.85rem">C6 — Travailler en équipe</h4>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--accent-cyan)">Acquise</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="80" style="width:0%"></div></div>
+          <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.75rem;line-height:1.6">Travail en équipe de 4, rôles définis, communication, SAÉ 1.06</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technical Skills -->
+    <div class="skills-layout">
+      <div>
+        <div class="skill-category-title">Langages de programmation</div>
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">C</span>
+            <span class="skill-pct">80%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="80"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">Java</span>
+            <span class="skill-pct">70%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="70"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">Python</span>
+            <span class="skill-pct">60%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="60"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">PHP</span>
+            <span class="skill-pct">55%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="55"></div></div>
+        </div>
+
+        <div class="skill-category-title" style="margin-top:2.5rem">Web & Bases de données</div>
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">HTML / CSS</span>
+            <span class="skill-pct">78%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="78"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">Tutorial D / SQL</span>
+            <span class="skill-pct">72%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="72"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">UML / Modélisation</span>
+            <span class="skill-pct">70%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="70"></div></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="skill-category-title">Outils & Technologies</div>
+        <div class="tech-grid">
+          <div class="tech-badge"><span class="tech-icon">🐧</span><span class="tech-name">Linux</span></div>
+          <div class="tech-badge"><span class="tech-icon">🐚</span><span class="tech-name">Bash</span></div>
+          <div class="tech-badge"><span class="tech-icon">🐳</span><span class="tech-name">Docker</span></div>
+          <div class="tech-badge"><span class="tech-icon">⬡</span><span class="tech-name">GitHub</span></div>
+          <div class="tech-badge"><span class="tech-icon">📋</span><span class="tech-name">Trello</span></div>
+          <div class="tech-badge"><span class="tech-icon">🎨</span><span class="tech-name">Figma</span></div>
+          <div class="tech-badge"><span class="tech-icon">☕</span><span class="tech-name">JavaFX</span></div>
+          <div class="tech-badge"><span class="tech-icon">🗄️</span><span class="tech-name">SQLite</span></div>
+          <div class="tech-badge"><span class="tech-icon">📐</span><span class="tech-name">UML</span></div>
+        </div>
+
+        <div class="skill-category-title" style="margin-top:2.5rem">Langues</div>
+        <div class="lang-grid">
+          <div class="lang-card">
+            <div style="font-size:1.5rem;margin-bottom:0.5rem">🇫🇷</div>
+            <div class="lang-name">Français</div>
+            <div class="lang-level">Natif</div>
+          </div>
+          <div class="lang-card">
+            <div style="font-size:1.5rem;margin-bottom:0.5rem">🇬🇧</div>
+            <div class="lang-name">Anglais</div>
+            <div class="lang-level">B2 — Avancé</div>
+          </div>
+          <div class="lang-card">
+            <div style="font-size:1.5rem;margin-bottom:0.5rem">🇪🇸</div>
+            <div class="lang-name">Espagnol</div>
+            <div class="lang-level">A2 — Débutant</div>
+          </div>
+        </div>
+
+        <div class="skill-category-title" style="margin-top:2.5rem">Soft Skills</div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.6rem">
+          <span class="tag tag-cyan">Autonomie</span>
+          <span class="tag tag-blue">Rigueur</span>
+          <span class="tag tag-green">Esprit d'équipe</span>
+          <span class="tag tag-purple">Curiosité</span>
+          <span class="tag tag-cyan">Résolution de problèmes</span>
+          <span class="tag tag-blue">Adaptabilité</span>
+          <span class="tag tag-green">Communication</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer"><span>Thomas Le Goff</span> · BUT Informatique · IUT de Lannion · 2025–2026</footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     PAGE — CONTACT
+═══════════════════════════════════════════════════ -->
+<div class="page" id="contact">
+  <section>
+    <div class="section-label">Travaillons ensemble</div>
+    <h2 class="section-title">Contact</h2>
+    <p style="color:var(--text-secondary);max-width:560px;line-height:1.8;margin-bottom:3rem;font-size:0.95rem">
+      Vous êtes à la recherche d'un alternant motivé en développement ou data ? N'hésitez pas à me contacter !
+    </p>
+
+    <div class="contact-layout">
+      <!-- Info -->
+      <div class="contact-info">
+        <a href="tel:0783865074" class="contact-item">
+          <div class="contact-icon">📱</div>
+          <div>
+            <div class="contact-label">Téléphone</div>
+            <div class="contact-val">07 83 86 50 74</div>
+          </div>
+        </a>
+        <a href="mailto:tlegoff31@gmail.com" class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-val">tlegoff31@gmail.com</div>
+          </div>
+        </a>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Adresse</div>
+            <div class="contact-val">40 Hent Krec'h Gwenn<br>22300 Lannion</div>
+          </div>
+        </div>
+        <a href="https://www.linkedin.com/in/thomas-le-goff-4585313ba/" target="_blank" class="contact-item">
+          <div class="contact-icon">💼</div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-val">thomas-le-goff</div>
+          </div>
+        </a>
+        <a href="https://www.iut-lannion.fr" target="_blank" class="contact-item">
+          <div class="contact-icon">🎓</div>
+          <div>
+            <div class="contact-label">Établissement</div>
+            <div class="contact-val">IUT de Lannion — BUT Informatique</div>
+          </div>
+        </a>
+        <div style="margin-top:1rem">
+          <a href="thomas_le_goff_cv.pdf" download class="btn btn-primary" style="width:100%;justify-content:center">
+            ⤓ Télécharger mon CV (PDF)
+          </a>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <form class="contact-form" id="contact-form" onsubmit="return false">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nom</label>
+            <input class="form-input" type="text" name="name" placeholder="Votre nom" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" name="email" placeholder="votre@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sujet</label>
+          <input class="form-input" type="text" name="subject" placeholder="Proposition d'alternance, question...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" name="message" placeholder="Votre message..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="document.getElementById('contact-form').dispatchEvent(new Event('submit'))">
+          Envoyer le message →
+        </button>
+      </form>
+    </div>
+  </section>
+  <footer class="footer"><span>Thomas Le Goff</span> · BUT Informatique · IUT de Lannion · 2025–2026</footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     MODAL — LOGIN ADMIN
+═══════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="login-modal">
+  <div class="modal" style="max-width:400px">
+    <button class="modal-close" onclick="closeModal('login-modal')">✕</button>
+    <div class="modal-title">// Accès Administration</div>
+    <div class="login-form">
+      <div class="form-group">
+        <label class="form-label">Mot de passe</label>
+        <input class="form-input" type="password" id="admin-pw" placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <button class="btn btn-primary" onclick="adminLogin()" style="width:100%;justify-content:center">
+        Connexion →
+      </button>
+    </div>
+    <p style="font-size:0.72rem;color:var(--text-muted);margin-top:1rem;font-family:var(--font-mono)">// Le mode admin permet d'ajouter, modifier et supprimer des projets.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     MODAL — ADD/EDIT PROJECT
+═══════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="project-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('project-modal')">✕</button>
+    <div class="modal-title" id="proj-modal-title">// Nouveau Projet</div>
+    <input type="hidden" id="proj-id">
+    <div style="display:flex;flex-direction:column;gap:1rem">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Titre *</label>
+          <input class="form-input" type="text" id="proj-title" placeholder="Nom du projet">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Emoji</label>
+          <input class="form-input" type="text" id="proj-emoji" placeholder="💻" maxlength="4" style="font-size:1.2rem">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Description *</label>
+        <textarea class="form-textarea" id="proj-desc" placeholder="Décrivez votre projet..." style="min-height:100px"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Catégorie</label>
+          <select class="form-input" id="proj-category" style="background:var(--bg-secondary);cursor:none">
+            <option value="c">C / Algo</option>
+            <option value="java">Java</option>
+            <option value="web">Web</option>
+            <option value="bdd">Bases de données</option>
+            <option value="sys">Système / DevOps</option>
+            <option value="other">Autre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tags (virgule)</label>
+          <input class="form-input" type="text" id="proj-tags" placeholder="C, Algo, SAÉ">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Lien GitHub</label>
+          <input class="form-input" type="url" id="proj-github" placeholder="https://github.com/...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Lien externe</label>
+          <input class="form-input" type="url" id="proj-link" placeholder="https://...">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Image (optionnel)</label>
+        <input class="form-input" type="file" id="proj-image" accept="image/*" style="cursor:pointer;padding:0.5rem">
+      </div>
+      <div style="display:flex;gap:1rem;justify-content:flex-end;margin-top:0.5rem">
+        <button class="btn btn-outline" onclick="closeModal('project-modal')">Annuler</button>
+        <button class="btn btn-primary" onclick="saveProject()">Enregistrer →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+
+<!-- ═══════════════════════════════════════════════════
+     AI CHAT WIDGET
+═══════════════════════════════════════════════════ -->
+
+<!-- Bouton flottant -->
+<button class="ai-chat-btn" onclick="toggleAiChat()" title="Discuter avec Thomas IA">
+  💬
+  <span class="ai-btn-tooltip">Poser une question à Thomas</span>
+</button>
+
+<!-- Fenêtre de chat -->
+<div class="ai-chat-window" id="ai-chat-window">
+  <div class="ai-chat-header">
+    <div class="ai-chat-avatar">👨‍💻</div>
+    <div class="ai-chat-header-info">
+      <div class="ai-chat-header-name">Thomas Le Goff</div>
+      <div class="ai-chat-header-status">Assistant · En ligne</div>
+    </div>
+    <button class="ai-chat-close" onclick="toggleAiChat()">✕</button>
+  </div>
+
+  <div class="ai-chat-messages" id="ai-chat-messages"></div>
+
+  <div class="ai-suggestions" id="ai-suggestions">
+    <button class="ai-suggestion-chip" onclick="sendSuggestion('Tu cherches quelle alternance ?')">Tu cherches quelle alternance ?</button>
+    <button class="ai-suggestion-chip" onclick="sendSuggestion('Parle-moi du Sokoban')">Parle-moi du Sokoban</button>
+    <button class="ai-suggestion-chip" onclick="sendSuggestion('Quelles sont tes compétences ?')">Quelles sont tes compétences ?</button>
+    <button class="ai-suggestion-chip" onclick="sendSuggestion('Comment te contacter ?')">Comment te contacter ?</button>
+  </div>
+
+  <div class="ai-chat-input-row">
+    <textarea class="ai-chat-input" id="ai-chat-input" rows="1" placeholder="Pose-moi une question…" onkeydown="aiChatKeydown(event)"></textarea>
+    <button class="ai-chat-send" id="ai-chat-send" onclick="sendAiMessage()">➤</button>
+  </div>
+</div>
+
+<script src="js/ai-chat.js"></script>
+</body>
+</html>
